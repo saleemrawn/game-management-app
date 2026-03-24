@@ -26,7 +26,7 @@ async function getUpdateGenreById(req, res) {
   res.render("updateGenre", { title: "Update Genre", genre: genre });
 }
 
-async function getCreateGenre(req, res) {
+function getCreateGenre(req, res) {
   res.render("createGenre", { title: "Create Genre" });
 }
 
