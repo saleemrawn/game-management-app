@@ -1,0 +1,69 @@
+<h1><%= title %></h1>
+<div class="d-flex justify-content-between align-items-center">
+  <h2 class="mt-4 mb-3">Games</h2>
+  <a href="/games/createGame" class="btn btn-primary d-flex"><i data-lucide="plus" class="me-1"></i>Add Game</a>
+</div>
+<% if(locals.games) { %>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead class="text-nowrap">
+        <tr>
+          <th class="text-nowrap" style="width: 1%">ID</th>
+          <th>Game</th>
+          <th>Year</th>
+          <th>Developer</th>
+          <th>Genres</th>
+          <th>Modes</th>
+          <th>Platforms</th>
+          <th class="text-nowrap" style="width: 1%"></th>
+          <th class="text-nowrap" style="width: 1%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% games.forEach((game) => { %>
+          <tr>
+            <td><%= game.game_id %></td>
+            <td><a href="/games/<%= game.game_id %>"><%= game.game_name %></a></td>
+            <td><%= game.release_year %></td>
+            <td><%= game.developer_name %></td>
+            <td>
+              <% if(game.genres) { %>
+                <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                  <% game.genres.forEach((genre) => { %>
+                    <li class="bg-success-subtle px-3 py-1 rounded-pill"><%= genre.name %></li>
+                  <% }); %>
+                </ul>
+              <% }; %>
+            </td>
+            <td>
+                <% if(game.modes) { %>
+                  <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                    <% game.modes.forEach((mode) => { %>
+                      <li class="bg-primary-subtle px-3 py-1 rounded-pill"><%= mode.name %></li>
+                    <% }); %>
+                  </ul>
+                <% }; %>
+            </td>
+            <td>
+              <% if(game.platforms) { %>
+                <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                  <% game.platforms.forEach((platform) => { %>
+                    <li class="bg-warning-subtle px-3 py-1 rounded-pill"><%= platform.name %></li>
+                  <% }); %>
+                </ul>
+              <% }; %>
+            </td>
+            <td>
+              <a href="/games/edit/<%= game.game_id %>" class="btn btn-primary d-flex"><i data-lucide="pencil" width="16" class="me-2"></i>Edit</a>
+            </td>
+            <td>
+              <form action="/games/delete/<%= game.game_id %>" method="post">
+                <button type="submit" class="btn btn-danger d-flex" onclick="return confirm(`Are you sure you want to delete (ID: <%= game.game_id %>) <%= game.game_name %>?`)"><i data-lucide="trash" width="16" class="me-2"></i>Delete</button>
+              </form>
+            </td>
+            </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
