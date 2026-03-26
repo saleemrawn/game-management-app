@@ -1,0 +1,77 @@
+<div class="container-xxl">
+  <h1><%= title %></h1>
+  <%- include("./partials/errors.ejs") %>
+    <form action="/games/createGame" method="post" class="bg-white p-4 mt-4">
+      <div class="mb-5">
+        <label for="gameName" class="form-label fs-5" aria-describedby="gameNameHelpBlock">Name</label>
+        <input type="text" id="gameName" class="form-control" name="gameName" autocomplete="off" />
+        <div id="gameNameHelpBlock" class="form-text mt-2">Name must only contain letters, numbers, -:'.&!?</div>
+      </div>
+  
+      <div class="mb-5">
+        <label for="releaseYear" class="form-label fs-5">Release Year</label>
+        <input type="number" min="1900" max="2099" step="1" value="2026" id="releaseYear" class="form-control" name="releaseYear"  autocomplete="off" />
+      </div>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Developer</legend>
+        <div id="developerHelpBlock" class="form-text mb-3">Select one developer</div>
+        <div class="d-flex flex-wrap gap-2">
+          <% if(locals.categories) { %>
+            <% categories.forEach((category) => { %>
+              <% if(category.type === "developer") { %>
+                <input type="radio" id="<%= category.name %>" class="form-check-input btn-check" name="developer" value="<%= category.id %>" autocomplete="off" />
+                <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="developerHelpBlock"><%= category.name %></label>
+              <% }; %>
+            <% }); %>
+          <% }; %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Genres</legend>
+        <div id="genresHelpBlock" class="form-text mb-3">Select one or more genres</div>
+        <div class="d-flex flex-wrap gap-2">
+          <% if(locals.categories) { %>
+            <% categories.forEach((category) => { %>
+              <% if(category.type === "genre") { %>
+                <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="genres" value="<%= category.id %>" autocomplete="off" />
+                <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="genresHelpBlock"><%= category.name %></label>
+              <% }; %>
+            <% }); %>
+          <% }; %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Platforms</legend>
+        <div id="platformsHelpBlock" class="form-text mb-3">Select one or more platforms</div>
+        <div class="d-flex flex-wrap gap-2">
+          <% if(locals.categories) { %>
+            <% categories.forEach((category) => { %>
+              <% if(category.type === "platform") { %>
+                <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="platforms" value="<%= category.id %>" autocomplete="off" />
+                <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="platformsHelpBlock"><%= category.name %></label>
+              <% }; %>
+            <% }); %>
+          <% }; %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Modes</legend>
+        <div id="modesHelpBlock" class="form-text mb-3">Select one or more modes</div>
+        <div class="d-flex flex-wrap gap-2">
+          <% if(locals.categories) { %>
+            <% categories.forEach((category) => { %>
+              <% if(category.type === "mode") { %>
+                <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="modes" value="<%= category.id %>" autocomplete="off" />
+                <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="modesHelpBlock"><%= category.name %></label>
+              <% }; %>
+            <% }); %>
+          <% }; %>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+</div>
