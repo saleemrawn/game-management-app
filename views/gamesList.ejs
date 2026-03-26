@@ -28,7 +28,7 @@
             <td class="text-nowrap"><%= game.developer_name %></td>
             <td>
               <% if(game.genres) { %>
-                <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
                   <% game.genres.forEach((genre) => { %>
                     <li class="bg-success-subtle px-3 py-1 rounded-pill"><%= genre.name %></li>
                   <% }); %>
@@ -37,7 +37,7 @@
             </td>
             <td>
                 <% if(game.modes) { %>
-                  <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                  <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
                     <% game.modes.forEach((mode) => { %>
                       <li class="bg-primary-subtle px-3 py-1 rounded-pill"><%= mode.name %></li>
                     <% }); %>
@@ -46,7 +46,7 @@
             </td>
             <td>
               <% if(game.platforms) { %>
-                <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
+                <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
                   <% game.platforms.forEach((platform) => { %>
                     <li class="bg-warning-subtle px-3 py-1 rounded-pill"><%= platform.name %></li>
                   <% }); %>
