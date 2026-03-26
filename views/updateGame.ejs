@@ -1,0 +1,65 @@
+<div class="container-xxl">
+  <h1><%= title %></h1>
+  <%- include("./partials/errors.ejs") %>
+    <form action="/games/edit/<%= data.game_id %>" method="post" class="bg-white p-4 mt-4">
+      <input type="hidden" name="gameId" value="<%= data.game_id %>">
+      <div class="mb-5">
+        <label for="gameName" class="form-label fs-5" aria-describedby="gameNameHelpBlock">Name</label>
+        <input type="text" id="gameName" class="form-control" name="gameName" value="<%= data.game_name %>" autocomplete="off" />
+        <div id="gameNameHelpBlock" class="form-text mt-2">Name must only contain letters, numbers, -:'.&!?</div>
+      </div>
+  
+      <div class="mb-5">
+        <label for="releaseYear" class="form-label fs-5">Release Year</label>
+        <input type="number" min="1900" max="2099" step="1" id="releaseYear" class="form-control" name="releaseYear" value="<%= data.release_year %>" autocomplete="off"/>
+      </div>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Developer</legend>
+        <div id="developerHelpBlock" class="form-text mb-3">Select one developer</div>
+        <div class="d-flex flex-wrap gap-2">
+          <% data.all_developers.forEach((developer) => { %>
+              <input type="radio" id="<%= developer.name %>" class="form-check-input btn-check" name="developer" value="<%= developer.id %>" <%= developer.id === data.developer_id ? "checked" : ""  %> >
+              <label for="<%= developer.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="developerHelpBlock"><%= developer.name %></label>
+          <% }); %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Genres</legend>
+        <div id="genresHelpBlock" class="form-text mb-3">Select one or more genres</div>
+        <% const genreIds = data.selected_genres?.map((genre) => genre.id);  %>
+        <div class="d-flex flex-wrap gap-2">
+          <% data.all_genres.forEach((genre) => { %>
+              <input type="checkbox" id="<%= genre.name %>" class="form-check-input btn-check" name="genres" value="<%= genre.id %>" <%= genreIds?.some((id) => id === genre.id) ? "checked" : ""   %> >
+              <label for="<%= genre.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="genresHelpBlock"><%= genre.name %></label>
+          <% }); %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Platforms</legend>
+        <div id="platformsHelpBlock" class="form-text mb-3">Select one or more platforms</div>
+        <% const platformIds = data.selected_platforms?.map((platform) => platform.id);  %>
+        <div class="d-flex flex-wrap gap-2">
+          <% data.all_platforms.forEach((platform) => { %>
+              <input type="checkbox" id="<%= platform.name %>" class="form-check-input btn-check" name="platforms" value="<%= platform.id %>" <%= platformIds?.some((id) => id === platform.id) ? "checked" : "" %> >
+              <label for="<%= platform.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="platformsHelpBlock"><%= platform.name %></label>
+          <% }); %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="mb-5">
+        <legend class="fs-5">Modes</legend>
+        <div id="modesHelpBlock" class="form-text mb-3">Select one or more modes</div>
+        <% const modeIds = data.selected_modes?.map((m) => m.id);  %>
+        <div class="d-flex flex-wrap gap-2">
+          <% data.all_modes.forEach((mode) => { %>
+              <input type="checkbox" id="<%= mode.name %>" class="form-check-input btn-check" name="modes" value="<%= mode.id %>" <%=  modeIds?.some((id) => id === mode.id) ? "checked" : ""   %> >
+              <label for="<%= mode.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="modesHelpBlock"><%= mode.name %></label>
+          <% }); %>
+        </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+</div>
