@@ -23,9 +23,9 @@
         <% games.forEach((game) => { %>
           <tr>
             <td><%= game.game_id %></td>
-            <td><a href="/games/<%= game.game_id %>"><%= game.game_name %></a></td>
+            <td class="text-nowrap"><a href="/games/<%= game.game_id %>"><%= game.game_name %></a></td>
             <td><%= game.release_year %></td>
-            <td><%= game.developer_name %></td>
+            <td class="text-nowrap"><%= game.developer_name %></td>
             <td>
               <% if(game.genres) { %>
                 <ul class="list-unstyled mb-0 d-flex flex-column" style="gap: 8px;">
