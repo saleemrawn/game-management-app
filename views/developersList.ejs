@@ -1,0 +1,41 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1><%= title %></h1>
+  <a href="/developers/create" class="btn btn-primary d-flex"><i data-lucide="plus" class="me-1"></i>Add Developer</a>
+</div>
+
+<% if(locals.developers) { %>
+  <div class="table-responsive">
+    <table class="table align-middle mt-4">
+      <thead>
+        <tr>
+          <th class="text-nowrap" style="width: 1%">ID</th>
+          <th>Name</th>
+          <th class="text-nowrap text-center" style="width: 20%">No. of games</th>
+          <th class="text-nowrap" style="width: 1%"></th>
+          <th class="text-nowrap" style="width: 1%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% developers.forEach((developer) => { %>
+          <tr>
+            <td><%= developer.id %></td>
+            <% if(developer.number_of_games > 0) { %>
+              <td class="text-nowrap"><a href="/developers/<%= developer.id %>"><%= developer.name %></a></td>
+            <% } else { %>
+              <td><%= developer.name %></td>
+            <% } %>
+            <td class="text-center"><%= developer.number_of_games %></td>
+            <td>
+              <a href="/developers/edit/<%= developer.id %>" class="btn btn-primary d-flex"><i data-lucide="pencil" width="16" class="me-2"></i>Edit</a>
+            </td>
+            <td>
+              <form action="/developers/delete/<%= developer.id %>" method="post">
+                <button type="submit" class="btn btn-danger d-flex" onclick="return confirm(`Are you sure you want to delete developer (ID: <%= developer.id %>) <%= developer.name %>?`)"><i data-lucide="trash" width="16" class="me-2"></i>Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } %>  
