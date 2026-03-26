@@ -1,0 +1,40 @@
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h1><%= title %></h1>
+  <a href="/genres/create" class="btn btn-primary d-flex"><i data-lucide="plus" class="me-1"></i>Add Genre</a>
+</div>
+
+<% if(locals.genres) { %>
+  <div class="table-responsive">
+    <table class="table align-middle mt-4">
+      <thead>
+        <tr>
+          <th class="text-nowrap" style="width: 1%">ID</th>
+          <th>Name</th>
+          <th class="text-nowrap text-center" style="width: 20%">No. of games</th>
+          <th class="text-nowrap" style="width: 1%"></th>
+          <th class="text-nowrap" style="width: 1%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% genres.forEach((genre) => { %>
+          <tr>
+            <td><%= genre.id %></td>
+            <% if(genre.number_of_games > 0) { %>
+              <td><a href="/genres/<%= genre.id %>"><%= genre.name %></a></td>
+            <% } else { %>
+              <td><%= genre.name %></td>
+            <% } %>
+    
+            <td class="text-center"><%= genre.number_of_games %></td>
+            <td><a href="/genres/edit/<%= genre.id %>" class="btn btn-primary d-flex"><i data-lucide="pencil" width="16" class="me-2"></i>Edit</a></td>
+            <td>
+              <form action="/genres/delete/<%= genre.id %>" method="post">
+                <button type="submit" class="btn btn-danger d-flex" onclick="return confirm(`Are you sure you want to delete genre (ID: <%= genre.id %>) <%= genre.name %>?`)"><i data-lucide="trash" width="16" class="me-2"></i>Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
