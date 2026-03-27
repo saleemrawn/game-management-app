@@ -51,7 +51,7 @@ async function createMode(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("createMode", { title: "Create Mode", errors: errors.array() });
+    return res.status(400).render("createMode", { title: "Create Mode", errors: errors.array() });
   }
 
   const { modeName } = matchedData(req);
@@ -61,14 +61,13 @@ async function createMode(req, res) {
 
 async function updateMode(req, res) {
   const [mode] = await db.getModeById(req.params.modeId);
-  const errors = validationResult(req);
-
   if (!mode || mode.length === 0) {
     throw new CustomNotFoundError("Mode not found");
   }
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("updateMode", { title: "Update Mode", mode: mode, errors: errors.array() });
+    return res.status(400).render("updateMode", { title: "Update Mode", mode: mode, errors: errors.array() });
   }
 
   const { modeName } = matchedData(req);

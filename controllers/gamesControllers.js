@@ -59,12 +59,11 @@ async function getUpdateGameById(req, res) {
 
 async function createGame(req, res) {
   const categories = await db.getAllGamesCategories();
-  const errors = validationResult(req);
-
   if (!categories || categories.length === 0) {
     throw new CustomInternalServerError("Could not load categories");
   }
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render("createGame", { title: "Add Game", categories: categories, errors: errors.array() });
   }
@@ -89,14 +88,13 @@ async function deleteGame(req, res) {
 
 async function updateGame(req, res) {
   const [data] = await db.getUpdateGameById(req.params.gameId);
-  const errors = validationResult(req);
-
   if (!data || data.length === 0) {
     throw new CustomNotFoundError("Game not found");
   }
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("updateGame", { title: "Update Game", data: data, errors: errors.array() });
+    return res.status(400).render("updateGame", { title: "Update Game", data: data, errors: errors.array() });
   }
 
   const { gameName, releaseYear, developer, genres, platforms, modes } = matchedData(req);

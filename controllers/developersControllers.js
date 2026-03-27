@@ -50,7 +50,7 @@ async function createDeveloper(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("createDeveloper", { title: "Create Developer", errors: errors.array() });
+    return res.status(400).render("createDeveloper", { title: "Create Developer", errors: errors.array() });
   }
 
   const { developerName } = matchedData(req);
@@ -60,14 +60,13 @@ async function createDeveloper(req, res) {
 
 async function updateDeveloper(req, res) {
   const [developer] = await db.getDeveloperById(req.params.developerId);
-  const errors = validationResult(req);
-
   if (!developer || developer.length === 0) {
     throw new CustomNotFoundError("Developer not found");
   }
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("updateDeveloper", { title: "Update Developer", developer: developer, errors: errors.array() });
+    return res.status(400).render("updateDeveloper", { title: "Update Developer", developer: developer, errors: errors.array() });
   }
 
   const { developerName } = matchedData(req);

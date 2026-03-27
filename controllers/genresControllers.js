@@ -51,7 +51,7 @@ async function createGenre(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("createGenre", { title: "Add Genre", errors: errors.array() });
+    return res.status(400).render("createGenre", { title: "Add Genre", errors: errors.array() });
   }
 
   const { genreName } = matchedData(req);
@@ -61,14 +61,13 @@ async function createGenre(req, res) {
 
 async function updateGenre(req, res) {
   const [genre] = await db.getGenreById(req.params.genreId);
-  const errors = validationResult(req);
-
   if (!genre || genre.length === 0) {
     throw new CustomNotFoundError("Genre not found");
   }
 
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("updateGenre", { title: "Update Genre", genre: genre, errors: errors.array() });
+    return res.status(400).render("updateGenre", { title: "Update Genre", genre: genre, errors: errors.array() });
   }
 
   const { genreName } = matchedData(req);
