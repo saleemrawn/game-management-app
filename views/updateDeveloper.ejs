@@ -1,7 +1,7 @@
 <div class="container-xxl">
   <h1><%= title %></h1>
   <%- include("./partials/errors.ejs") %>
-  <form action="/developers/edit/<%= developer.id %>" method="post" class="bg-white p-4 mt-4">
+  <form action="/developers/edit/<%= developer.id %>" method="post" class="bg-white p-4 mt-4 rounded-4">
     <input type="hidden" name="developerId" value="<%= developer.id %>" />
     <div class="mb-5">
       <label for="developerName" class="form-label fs-5" aria-describedby="developerNameHelpBlock">Name</label>
