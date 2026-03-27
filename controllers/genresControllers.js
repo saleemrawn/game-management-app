@@ -51,7 +51,7 @@ async function createGenre(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("createGenre", { title: "Create Genre", errors: errors.array() });
+    res.status(400).render("createGenre", { title: "Add Genre", errors: errors.array() });
   }
 
   const { genreName } = matchedData(req);
