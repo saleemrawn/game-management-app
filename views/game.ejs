@@ -1,0 +1,46 @@
+<% if(locals.game) { %>
+    <div class="container-xxl">
+        <h1 class="mb-4"><%= game.game_name %></h1>
+        <div class="row text-center gap-4 gap-md-3">
+            <div class="col-md px-0">
+                <div class="d-flex flex-column justify-content-center align-items-center gap-2 py-3 bg-primary text-white fs-5 rounded-4">
+                    <i data-lucide="calendar"></i>
+                    Release Year
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center py-3"><%= game.release_year %></div>
+            </div>
+
+            <div class="col-md px-0">
+                <div class="d-flex flex-column align-items-center gap-2 py-3 bg-info fs-5 rounded-4"><i data-lucide="code"></i>Developer</div>
+                <div class="py-3"><%= game.developer_name %></div>
+            </div>
+
+            <div class="col-md px-0">
+                <div class="d-flex flex-column align-items-center gap-2 py-3 bg-success text-white fs-5 rounded-4"><i data-lucide="drama"></i>Genres</div>
+                <div class="d-flex flex-column py-3">
+                    <% game.genres.forEach(genre => { %>
+                        <div><%= genre.name %></div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <div class="col-md px-0">
+                <div class="d-flex flex-column align-items-center gap-2 py-3 bg-warning fs-5 rounded-4"><i data-lucide="gamepad-2"></i>Platforms</div>
+                <div class="d-flex flex-column py-3">
+                    <% game.platforms.forEach(platform => { %>
+                        <div><%= platform.name %></div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <div class="col-md px-0">
+                <div class="d-flex flex-column align-items-center gap-2 py-3 bg-danger text-white fs-5 rounded-4"><i data-lucide="users"></i>Modes</div>
+                <div class="d-flex flex-column py-3">
+                    <% game.modes.forEach(mode => { %>
+                        <div><%= mode.name %></div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %> 
