@@ -14,6 +14,7 @@ const errorRouter = require("./routes/errorRouter");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(express.static("public"));
 app.use(ejsLayouts);
 app.use(express.urlencoded({ extended: true }));
 app.use("/", indexRouter);
