@@ -40,14 +40,14 @@ async function getGamesByModeId(id) {
       ga.id AS game_id,
       ga.name AS game_name,
       ga.release_year,
-      de.name AS mode_name,
+      de.name AS developer_name,
       gen.id AS genre_id,
       gen.genres,
       mo.id AS mode_id,
       mo.modes,
       plt.platforms
     FROM games AS ga
-    LEFT JOIN developers AS de ON de.id = ga.id
+    LEFT JOIN developers AS de ON de.id = ga.developer_id
     LEFT JOIN genres AS gen ON gen.game_id = ga.id
     LEFT JOIN platforms AS plt ON plt.game_id = ga.id
     LEFT JOIN modes AS mo ON mo.game_ID = ga.id
