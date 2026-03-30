@@ -1,0 +1,52 @@
+<div class="collapse" id="collapseExample">
+  <div class="card card-body p-4 rounded-4">
+    <h3 class="mb-4">Filter by</h3>
+    <% if(locals.filters) { %>
+        <div class="row gap-5">
+            <div class="col-md">
+                <h4>Genre</h4>
+                    <ul class="list-group mt-3">
+                        <% filters.forEach((fl) => { %>
+                            <% if(fl.category === "genre") { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="/genres/<%= fl.id %>"><%= fl.name %></a>
+                                    <span class="badge text-bg-primary rounded-pill"><%= fl.number_of_games %></span>
+                                </li>
+                            <% } %>
+                        <% }) %>
+                    </ul>
+            </div>
+
+            <div class="col-md">
+                <h4>Platform</h4>
+                    <ul class="list-group mt-3">
+                        <% filters.forEach((fl) => { %>
+                            <% if(fl.category === "platform") { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="/platforms/<%= fl.id %>"><%= fl.name %></a>
+                                    <span class="badge text-bg-primary rounded-pill"><%= fl.number_of_games %></span>
+                                </li>
+                            <% } %>
+                        <% }) %>
+                    </ul>
+            </div>
+
+            <div class="col-md">
+                <h4>Mode</h4>
+                    <ul class="list-group mt-3">
+                        <% filters.forEach((fl) => { %>
+                            <% if(fl.category === "mode") { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="/modes/<%= fl.id %>"><%= fl.name %></a>
+                                    <span class="badge text-bg-primary rounded-pill"><%= fl.number_of_games %></span>
+                                </li>
+                            <% } %>
+                        <% }) %>
+                    </ul>
+            </div>
+        </div>
+    <% } else { %>
+        <div>No filters available</div>
+    <% } %>
+  </div>
+</div>
