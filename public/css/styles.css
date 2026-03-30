@@ -1,0 +1,13 @@
+body {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+}
+
+.table td ul,
+.table td li {
+  width: max-content;
+}
