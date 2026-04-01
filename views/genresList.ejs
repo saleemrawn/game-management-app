@@ -1,9 +1,11 @@
 <div class="mb-4 d-flex justify-content-between align-items-center">
   <h1><%= title %></h1>
-  <a href="/genres/create" class="btn btn-primary d-flex"><i data-lucide="plus" class="me-1"></i>Add Genre</a>
+  <% if(locals.genres && genres.length > 0) { %>
+    <a href="/genres/create" class="btn btn-primary d-flex"><i data-lucide="plus" class="me-1"></i>Add Genre</a>
+  <% } %>
 </div>
 
-<% if(locals.genres) { %>
+<% if(locals.genres && genres.length > 0) { %>
   <div class="table-responsive rounded-4">
     <table class="table align-middle mb-0">
       <thead>
@@ -37,4 +39,6 @@
       </tbody>
     </table>
   </div>
+<% } else { %>
+  <a href="/genres/create" class="btn btn-primary btn-lg d-flex align-items-center" style="width: fit-content;"><i data-lucide="plus" class="me-1"></i>Add Genre</a>
 <% } %>
