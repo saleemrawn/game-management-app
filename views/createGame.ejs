@@ -15,63 +15,78 @@
   
       <fieldset class="mb-5">
         <legend class="fs-5">Developer</legend>
+        <% if(locals.categories && categories.some((cat) => cat.type === "developer")) { %>
         <div id="developerHelpBlock" class="form-text mb-3">Select one developer</div>
         <div class="d-flex flex-wrap gap-2">
-          <% if(locals.categories) { %>
             <% categories.forEach((category) => { %>
               <% if(category.type === "developer") { %>
                 <input type="radio" id="<%= category.name %>" class="form-check-input btn-check" name="developer" value="<%= category.id %>" autocomplete="off" />
                 <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="developerHelpBlock"><%= category.name %></label>
               <% }; %>
-            <% }); %>
-          <% }; %>
+            <% }); %> 
         </div>
+        <% } else { %>
+          <a href="/developers/create" class="btn btn-primary d-flex" style="width: fit-content;"><i data-lucide="plus" class="me-1"></i>Add Developer</a>
+        <% } %>
       </fieldset>
   
       <fieldset class="mb-5">
         <legend class="fs-5">Genres</legend>
+        <% if(locals.categories && categories.some((cat) => cat.type === "genre")) { %>
         <div id="genresHelpBlock" class="form-text mb-3">Select one or more genres</div>
         <div class="d-flex flex-wrap gap-2">
-          <% if(locals.categories) { %>
             <% categories.forEach((category) => { %>
               <% if(category.type === "genre") { %>
                 <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="genres" value="<%= category.id %>" autocomplete="off" />
                 <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="genresHelpBlock"><%= category.name %></label>
               <% }; %>
             <% }); %>
-          <% }; %>
         </div>
+        <% } else { %>
+          <a href="/genres/create" class="btn btn-primary d-flex" style="width: fit-content;"><i data-lucide="plus" class="me-1"></i>Add Genre</a>
+        <% } %>
       </fieldset>
   
       <fieldset class="mb-5">
         <legend class="fs-5">Platforms</legend>
+        <% if(locals.categories && categories.some((cat) => cat.type === "platform")) { %>
         <div id="platformsHelpBlock" class="form-text mb-3">Select one or more platforms</div>
         <div class="d-flex flex-wrap gap-2">
-          <% if(locals.categories) { %>
             <% categories.forEach((category) => { %>
               <% if(category.type === "platform") { %>
                 <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="platforms" value="<%= category.id %>" autocomplete="off" />
                 <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="platformsHelpBlock"><%= category.name %></label>
               <% }; %>
             <% }); %>
-          <% }; %>
         </div>
+        <% } else { %>
+          <a href="/platforms/create" class="btn btn-primary d-flex" style="width: fit-content;"><i data-lucide="plus" class="me-1"></i>Add Platform</a>
+        <% } %>
       </fieldset>
   
       <fieldset class="mb-5">
         <legend class="fs-5">Modes</legend>
+        <% if(locals.categories && categories.some((cat) => cat.type === "mode")) { %>
         <div id="modesHelpBlock" class="form-text mb-3">Select one or more modes</div>
         <div class="d-flex flex-wrap gap-2">
-          <% if(locals.categories) { %>
             <% categories.forEach((category) => { %>
               <% if(category.type === "mode") { %>
                 <input type="checkbox" id="<%= category.name %>" class="form-check-input btn-check" name="modes" value="<%= category.id %>" autocomplete="off" />
                 <label for="<%= category.name %>" class="form-check-label btn btn-outline-primary" aria-describedby="modesHelpBlock"><%= category.name %></label>
               <% }; %>
             <% }); %>
-          <% }; %>
         </div>
+        <% } else { %>
+          <a href="/modes/create" class="btn btn-primary d-flex" style="width: fit-content;"><i data-lucide="plus" class="me-1"></i>Add Mode</a>
+        <% } %>
       </fieldset>
-      <div class="d-flex justify-content-end"><button type="submit" class="btn btn-primary btn-lg">Submit</button></div>
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary btn-lg"
+          <%= !categories ||
+          !categories.some((cat) => cat.type === "developer") ||
+          !categories.some((cat) => cat.type === "genre") ||
+          !categories.some((cat) => cat.type === "platform") ||
+          !categories.some((cat) => cat.type === "mode") ? "disabled" : "" %>>Submit</button>
+      </div>
     </form>
 </div>
