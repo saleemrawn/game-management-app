@@ -38,7 +38,7 @@
             <td><%= game.game_id %></td>
             <td class="text-nowrap"><a href="/games/<%= game.game_id %>"><%= game.game_name %></a></td>
             <td><%= game.release_year %></td>
-            <td class="text-nowrap"><%= game.developer_name %></td>
+            <td class="text-nowrap"><a href="/developers/<%= game.developer_id %>"><%= game.developer_name %></a></td>
             <td>
               <% if(game.genres) { %>
                 <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
