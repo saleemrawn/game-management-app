@@ -1,1 +1,1 @@
-# game-management-app
+# Games Inventory App
