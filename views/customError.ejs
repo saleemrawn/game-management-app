@@ -2,6 +2,6 @@
     <% if(locals.error) { %>
         <img src="/icons/circle-alert.svg" alt="" class="w-64 h-64 mb-2" />
         <h1><%= error.statusCode %> - <%= error.message %></h1>
-        <a href="/">Back to dashboard</a>
+         <a href="javascript: history.back()">Go back</a>
     <% } %>
 </div>
